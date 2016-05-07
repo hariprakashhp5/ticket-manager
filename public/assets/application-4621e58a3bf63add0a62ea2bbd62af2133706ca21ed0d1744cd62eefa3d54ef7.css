@@ -1,0 +1,352 @@
+/* line 1, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/*a {
+  color: #000;
+
+  &:visited {
+    color: #666;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}*/
+/* line 35, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 41, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+.field {
+  float: left;
+  width: 100px;
+  margin: 0 10px 0 10px;
+}
+
+/* line 47, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+.actions {
+  margin: 0 10px 0 10px;
+}
+
+/* line 51, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 55, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 61, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 69, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 80, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/* line 1, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+}
+
+/* line 8, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 12px;
+  padding: 4px;
+  border: 1px solid #999;
+  background: #78ccb7;
+  color: #00000;
+  text-align: center;
+}
+
+/* line 20, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+td {
+  text-align: center;
+  background-color: #FFF;
+  color: #424242;
+  padding: 4px;
+  /* height: 40px;*/
+  vertical-align: middle;
+  font-size: 10px;
+  border: 1px solid #999;
+  /*width: 14.2857142857143%;*/
+}
+/* line 31, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+td a {
+  color: #666;
+}
+/* line 34, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+td a:hover {
+  color: red;
+}
+
+/* line 41, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+a {
+  text-decoration: none;
+  color: #666;
+}
+/* line 49, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+a:hover {
+  color: #000;
+}
+
+/* line 55, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.tdfield {
+  width: 40px;
+  text-align: center;
+}
+
+/* line 61, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.one {
+  width: 100px;
+  height: 30px;
+}
+
+/* line 66, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.status, .pull-left {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px;
+  border: 2px solid #999;
+  background: #78ccb7;
+  color: #00000;
+  text-align: center;
+  float: right;
+  margin: 5px 0 5px 5px;
+}
+
+/* line 79, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.container {
+  height: 30px;
+  border: 1px solid #999;
+  width: 0 auto;
+  padding: 5px 0 3px 0;
+  background: #78ccb7;
+}
+/* line 85, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.container .top-left, .container .top-right {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  float: left;
+  margin: 5px 5px 5px 5px;
+}
+/* line 92, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.container .top-right {
+  float: right;
+}
+
+/* line 97, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.half {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* line 103, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.half-one {
+  width: 48%;
+  margin: 0 10px 10px 10px;
+  float: left;
+}
+
+/* line 110, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.half-two {
+  width: 100%;
+  height: 500px;
+}
+
+/* line 115, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.pull-left {
+  margin: 5px 5px 5px 0;
+  float: left;
+}
+/* line 118, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.pull-left a {
+  color: red;
+}
+
+/* line 124, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.test {
+  width: 50%;
+  height: 600px;
+}
+
+/* line 129, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.btn-submit {
+  color: #FFFFFF;
+  width: 100%;
+  font-size: 15px;
+  text-transform: uppercase;
+  /*background: #c91717;*/
+  background: #666;
+  padding: 10px 10px;
+  border: 0;
+  margin-top: 6px;
+}
+
+/* line 141, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.comments {
+  text-align: center;
+  border: 1px solid red;
+}
+
+/* line 146, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+#op {
+  border: 1px solid #999;
+  margin: 0 10px 10px 10px;
+}
+
+/* line 151, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+#textarea {
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  border: 1px solid gray;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  height: 412px;
+  overflow: auto;
+  padding: 2px;
+  resize: both;
+  width: 700px;
+}
+
+/* line 164, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+#textarea2 {
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  border: 1px solid gray;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  height: 590px;
+  overflow: auto;
+  padding: 2px;
+  resize: both;
+  width: 695px;
+}
+
+/* line 177, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.even td {
+  background-color: #F0FDFA;
+}
+
+/* line 181, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.odd td {
+  background-color: #FFFFFF;
+}
+
+/* line 185, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.hover td {
+  background-color: #ffffe5;
+}
+
+/* line 189, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.blue {
+  color: blue;
+}
+
+/* line 193, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.red {
+  color: red;
+}
+
+/* line 197, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.orange {
+  color: orange;
+}
+
+/* line 201, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/trackers.scss */
+.green {
+  color: green;
+}
+/* line 1, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/users.scss */
+.tt {
+  color: #666666;
+  width: 50%;
+  border: 1px solid #E6E6E6;
+  border-radius: 0px;
+  height: 40px;
+  margin: 6px auto;
+  text-indent: 10px;
+}
+
+/* line 11, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/users.scss */
+.form {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* line 17, /home/prakash/rbra/Heroku/tmanager/app/assets/stylesheets/users.scss */
+.btn-submit-one {
+  color: #FFFFFF;
+  font-size: 15px;
+  text-transform: uppercase;
+  /*background: #c91717;*/
+  background: #666;
+  padding: 10px 10px;
+  border: 0;
+  margin-top: 6px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
