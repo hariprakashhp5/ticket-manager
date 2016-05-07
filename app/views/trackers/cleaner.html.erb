@@ -1,0 +1,8 @@
+<%= form_tag url_for(:controller=>"trackers",:action =>"htmlclnr")  do %>
+	<%= tinymce_assets %>
+
+<%= text_area_tag :content, "", :class => "tinymce", :rows => 20, :cols => 120 %>
+
+<%= tinymce %>
+ <%= submit_tag 'Bundle', :disable_with => 'Please wait...'%>
+	<%end%>

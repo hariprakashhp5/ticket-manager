@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<Workbook ss:Name="hari" xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Tickets">
+    <Table>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="85"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="85"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="85"/>
+      <Row>
+        
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">DATE</Data></Cell>
+        <Cell><Data ss:Type="String">TICKET ID</Data></Cell>
+        <Cell><Data ss:Type="String">TICKET OWNER</Data></Cell>
+        <Cell><Data ss:Type="String">CREATED</Data></Cell>
+        <Cell><Data ss:Type="String">ETA</Data></Cell>
+        <Cell><Data ss:Type="String">FINISHED</Data></Cell>
+        <Cell><Data ss:Type="String">TYPE OF WORK</Data></Cell>
+        <Cell><Data ss:Type="String">COMMITS</Data></Cell>
+        <Cell><Data ss:Type="String">STAGING</Data></Cell>
+        <Cell><Data ss:Type="String">DESCRIPTION</Data></Cell>
+        <Cell><Data ss:Type="String">CONFIG OWNER</Data></Cell>
+      </Row>
+    <% @dat.each do |tracker| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= tracker.created_at.strftime("%d-%m-%y") %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tracker.ticket_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.owner %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.created %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.eta %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.finished %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.tow %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tracker.noc %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.staging %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.disc %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= current_user.name.capitalize %></Data></Cell> 
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+
+  <Worksheet ss:Name="Pending">
+    <Table>
+       <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="85"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="85"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="80"/>
+            <ss:Column ss:Width="85"/>
+      <Row>
+        <Cell><Data ss:Type="String">DATE</Data></Cell>
+        <Cell><Data ss:Type="String">TICKET ID</Data></Cell>
+        <Cell><Data ss:Type="String">TICKET OWNER</Data></Cell>
+        <Cell><Data ss:Type="String">CREATED</Data></Cell>
+        <Cell><Data ss:Type="String">ETA</Data></Cell>
+        <Cell><Data ss:Type="String">FINISHED</Data></Cell>
+        <Cell><Data ss:Type="String">TYPE OF WORK</Data></Cell>
+        <Cell><Data ss:Type="String">COMMITS</Data></Cell>
+        <Cell><Data ss:Type="String">STAGING</Data></Cell>
+        <Cell><Data ss:Type="String">DESCRIPTION</Data></Cell>
+        <Cell><Data ss:Type="String">CONFIG OWNER</Data></Cell>
+      </Row>
+    <% @pen.each do |tracker| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= tracker.created_at.strftime("%d-%m-%y") %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tracker.ticket_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.owner %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.created %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.eta %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.finished %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.tow %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tracker.noc %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.staging %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= tracker.disc %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= current_user.name.capitalize %></Data></Cell> 
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

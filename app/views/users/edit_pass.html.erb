@@ -1,0 +1,13 @@
+
+<div class="page">
+  <div class="container">
+    <div class="form">
+<h3>Change Password</h3>
+<%=form_for(@user_pass, :url => { :action => "update_password" }) do |f|%>
+<%= f.password_field :password, :placeholder => "New Password" ,class: "tt"  %>
+<%= f.password_field :password_confirmation, :placeholder => "Confirm New Password" ,class: "tt" %>
+<%= f.submit "Change", class: "btn-submit" %>
+<% end %>
+</div>
+</div>
+</div>

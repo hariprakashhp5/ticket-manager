@@ -1,0 +1,14 @@
+<%#= form_tag url_for(:controller=>"trackers",:action =>"htmlclnr") ,:method=>"get" do %>
+	<!--<extarea style="width:800px; height:200px;" name="content" ></textarea>-->
+	 <%#= submit_tag 'Bundle'%>
+	<%#end%>
+
+	
+<%if @onestep != nil%>
+<textarea style="width:1200px; height:800px;">
+
+	<% @onestep.each do |tagged|%>
+	<%=tagged.attribute("textContent").split(" ").join(" ")%>
+	<%end%>
+</textarea>
+<%end%>

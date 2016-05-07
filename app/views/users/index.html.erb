@@ -1,0 +1,31 @@
+
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>NAME</th>
+      <th>ROLE</th>
+      <th>EMAIL</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+         <td><%= best_in_place user ,:role, :inner_class => "tdfield", :as => :select, :collection => {"-1"=>"Dev","0"=>"User","1" => "Admin", "2" => "Qc"} %></td>
+        <td><%= user.email %></td>      
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<br>
+
+

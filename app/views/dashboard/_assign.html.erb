@@ -1,0 +1,12 @@
+<%= form_tag url_for(:controller=>"dashboard",:action =>"assign")  do %>
+<div class="field">
+<%= label_tag(:tid, "Ticket ID:") %><br>
+<%= number_field(:tid, nil, class: "one")%>
+</div>
+<div class="field">
+<%= label_tag(:tid, "Assign To:") %><br>
+<%=select_tag :uid, options_from_collection_for_select(@users, "id", "name"),class: "one"%>
+</div><br />
+ <%= submit_tag 'Assign', class: "one"%>
+	<%end%>
+

@@ -1,0 +1,87 @@
+<div class="half"><table>
+<thead>
+	<tr>
+	<th colspan="3"><strong>Total Tickets:<%=@trackers.count%></strong></th></tr>
+	<tr>
+		<th><strong>Inbound: <%=@early%></strong></th>
+		<th><strong>Neutral: <%=@ontime%></strong></th>
+		<th><strong>Outbound: <%=@delay%></strong></th>
+	</tr>
+</thead>
+</table>
+</div>
+
+
+
+ <h2 style="text-align:center;">
+  
+         <%@mon = { 0=> "December", 1=>"January", 2=>"Februrary", 3 =>"March", 4=>"April", 
+                    5=>"May", 6=>"June", 7=>"July", 8=>"August", 
+                    9=>"September", 10=>"October", 11=>"November", 12=>"December", 13=>"January"}%>
+
+       <%n= @date.month%>
+       <%= @mon[n-1]%>
+      <%=  link_to "<<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %> 
+      <%=  @date.strftime("%B-%Y").upcase %>
+      <%= link_to ">>", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> 
+      <%= @mon[n+1]%>
+    
+  </h2>
+
+  <h5 style="text-align:center;">
+  Export:
+  <%= link_to "CSV", status_path(format: "csv") %> |
+  <%= link_to "Excel", status_path(format: "xls") %>
+</h5>
+
+  <div class="pull-left">
+  	<span>Total:</span> <%=@dat.count%>
+  </div>
+
+ 
+<div class="status">
+  <span>Outbound:</span> <%=@this_month_delay%>
+</div>
+
+<div class="status">
+  <span>Neutral:</span> <%=@this_month_neutral%>
+</div>
+
+<div class="status">
+  <span>Inbound:</span> <%=@this_month_early%>
+</div>
+
+<div style="clear:both"></div>
+
+<table>
+  <thead>
+  	
+    <tr>
+      <th>Date</th>
+      <th>Ticket ID</th>
+      <th>Ticket Owner</th>
+      <th>Created</th>
+      <th>ETA</th>
+      <th>Finished</th>
+      <th>Type of Work</th>
+      <th>No. of Commits</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dat.each do |tracker| %>
+      <tr>
+        <td><%=tracker.created_at.strftime("%d-%m-%y")%></td>
+        <td ><%=tracker.ticket_id%></td>
+        <td ><%= tracker.owner%></td>
+        <td ><%= tracker.created %></td>
+        <td ><%=  tracker.eta%></td>
+        <td ><%=  tracker.finished%></td>
+        <td ><%=   tracker.tow%></td>
+        <td ><%=  tracker.noc%></td>
+        <td ><%=  tracker.disc%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,12 @@
+<div>
+	<p style="text-align:center; font-weight:bold">LINE CHART FOR CURRENT MONTH</p>
+<%= line_chart Tracker.where("uid=?",current_user.id).group_by_day(:created_at).count, xtitle: "Date", ytitle: "No. of Tickets"%> 
+</div>
+
+<div>
+	<p style="text-align:center; font-weight:bold">PIE CHART FOR CURRENT MONTH</p>
+<%= pie_chart @pie.group(:tow).count%>
+</div>
+
+
+

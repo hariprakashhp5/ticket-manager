@@ -1,0 +1,175 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+}
+
+
+th {
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 12px;
+  padding: 4px;
+  border: 1px solid #999;
+  background: #78ccb7;
+  color: #00000;
+  text-align: center;
+  
+}
+
+
+ td {
+ text-align: center;
+  background-color: #FFF;
+  color: #424242;
+  padding: 4px;
+ /* height: 40px;*/
+  vertical-align: middle;
+  font-size: 10px;
+  border: 1px solid #999;
+  /*width: 14.2857142857143%;*/
+
+  a{
+  color: #666;
+  
+  &:hover {
+    color: red;
+    
+  }
+  }
+}
+
+ a {
+   text-decoration:none;
+    color: #666;
+
+  &:visited {
+   
+  }
+
+  &:hover {
+    color: #000;
+    
+  }
+}
+
+.tdfield {
+  width:40px;
+  text-align:center;
+
+}
+
+.one{
+  width:100px;
+  height:30px;
+}
+
+.status,.pull-left{
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px;
+  border: 2px solid #999;
+  background: #78ccb7;
+  color: #00000;
+  text-align: center;
+  float: right;
+  margin: 5px 0 5px 5px;
+
+}
+.container{
+  height:30px;
+  border: 1px solid #999;
+  width: 0 auto;
+  padding: 5px 0 3px 0;
+  background: #78ccb7;
+.top-left, .top-right{
+  font-family: "Lucida Grande",arial,helvetica,sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+   float: left;
+   margin: 5px 5px 5px 5px;
+}
+.top-right{
+  float:right;
+}
+}
+
+.half{
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+.half-one{
+  width: 48%;
+  
+  margin: 0 10px 10px 10px;
+  float: left;
+}
+
+.half-two{
+  width:100%;
+  height:500px;;
+}
+
+.pull-left{
+  margin: 5px 5px 5px 0;
+  float:left;
+  a{
+  color:red;
+  }
+}
+
+
+.test{
+  width:50%;
+  height:600px;
+}
+
+.btn-submit {
+color: #FFFFFF;
+width:100%;
+font-size: 15px;
+text-transform: uppercase;
+/*background: #c91717;*/
+background: #666;
+padding: 10px 10px;
+border: 0;
+margin-top: 6px;
+}
+
+.comments{
+  text-align:center;
+  border:1px solid red;
+}
+
+#op{
+  border: 1px solid #999;
+  margin: 0 10px 10px 10px;
+}
+
+#textarea {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 412px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 700px;
+}
+
+#textarea2 {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 590px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 695px;
+}

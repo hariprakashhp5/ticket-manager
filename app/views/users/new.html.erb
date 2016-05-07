@@ -1,0 +1,13 @@
+<div class="form">
+<h1>Sign up</h1>
+<%= form_for(@user) do |f| %>
+      <%= f.text_field :name, :placeholder => "Name *" ,class: "tt" %>
+      <%= f.email_field :email, :placeholder => "Email *" ,class: "tt" %>
+      <%= f.password_field :password, :placeholder => "Password *" ,class: "tt"%>
+    <!--  <%#= f.password_field :password_confirmation, :placeholder => "Confirm Password *" ,class: "tt"%> -->
+      <div style="clear:both"></div>
+      <%= f.submit "Signup", class: "btn-submit-one" %>
+    <% end %>
+    <p><%= link_to "Login",'login'%></p>
+</div>
+  

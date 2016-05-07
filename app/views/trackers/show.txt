@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @tracker.ticket_id %>
+</p>
+
+<p>
+  <strong>Created:</strong>
+  <%= @tracker.created %>
+</p>
+
+<p>
+  <strong>Eta:</strong>
+  <%= @tracker.eta %>
+</p>
+
+<p>
+  <strong>Finished:</strong>
+  <%= @tracker.finished %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @tracker.owner %>
+</p>
+
+<p>
+  <strong>Noc:</strong>
+  <%= @tracker.noc %>
+</p>
+
+<p>
+  <strong>Disc:</strong>
+  <%= @tracker.disc %>
+</p>
+
+<%= link_to 'Edit', edit_tracker_path(@tracker) %> |
+<%= link_to 'Back', trackers_path %>
