@@ -32,9 +32,9 @@ else
 end
 end
 
-def require_qc_or_admin 
+def require_qc_or_admin_or_dev
   if current_user != nil
-  redirect_to '/login' unless current_user.admin? || current_user.qc?
+  redirect_to '/login' unless current_user.admin? || current_user.qc? || current_user.dev?
 else
   redirect_to '/login'
 end

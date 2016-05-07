@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   # post 'nokocleaner/done' => 'trackers#posttestcod'
   get 'pending' => 'trackers#pending_tickets'
   get 'charts' => 'trackers#chart_page'
+  post 'qc'=>'trackers#to_qc'
+  post 'error'=>'trackers#error'
+  post 'push'=>'trackers#to_push'
+  post 'live'=>'trackers#live'
+  get 'quality_check'=>'dashboard#qcin'
 
 
   resources :users

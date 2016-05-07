@@ -177,6 +177,30 @@ end
     end
   end
 
+def to_qc
+  tracker=Tracker.find(params[:id])
+  tracker.update(:status=>"1")
+  render :layout => false
+end
+
+def error
+  tracker=Tracker.find(params[:id])
+  tracker.update(:status=>"2")
+  render :layout => false
+end
+
+def to_push
+  tracker=Tracker.find(params[:id])
+  tracker.update(:status=>"3")
+  render :layout => false
+end
+
+def live
+  tracker=Tracker.find(params[:id])
+  tracker.update(:status=>"4")
+  render :layout => false
+end
+
   # PATCH/PUT /trackers/1
   # PATCH/PUT /trackers/1.json
   def update
@@ -198,12 +222,12 @@ def completed
     @eta=Tracker.where("id=?",params[:id]).pluck("eta").last
     @a=Date.parse(@eta)
     @b=Date.parse(@com)
-        @c=(@a-@b).to_i
-    if @c>0
+    #        @c=(@a-@b).to_i
+    if @a>@b
       @complt="< ETA"
-    elsif @c==0
+    elsif @a==@b
       @complt="On Time"
-    elsif @c<0
+    elsif @a<@b
       @complt="> ETA"
     end
     puts "oooo====#{@complt}"
@@ -236,7 +260,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tracker_params
-      params.require(:tracker).permit(:ticket_id, :comp, :staging, :created, :eta, :finished, :tow, :owner, :noc, :disc, :uid)
+      params.require(:tracker).permit(:ticket_id, :comp, :staging, :created, :eta, :finished, :tow, :owner, :noc, :disc, :uid, :bugs, :status)
     end
 
 end

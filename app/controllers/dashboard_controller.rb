@@ -26,6 +26,10 @@ class DashboardController < ApplicationController
 		@trackers=Tracker.where("comp=?","> ETA")
 	end
 
+	def qcin
+		require_qc_or_admin_or_dev
+		@trackers=Tracker.where("status=?", "1")
+	end
 
 	def assign
 		#params[:tid], params[:uid]

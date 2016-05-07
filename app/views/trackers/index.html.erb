@@ -34,6 +34,8 @@
     <!--   <th>Completed</th> -->
       <th>Description</th>
       <th>Blurb</th>
+      <th>Bugs</th>
+      <th>Status</th>
       <th>Delete</th>
       <!-- <th colspan="3"></th> -->
     </tr>
@@ -54,6 +56,22 @@
         <!-- <td ><%= tracker.comp %></td> -->
         <td ><%= best_in_place tracker, :disc, :as => :textarea%></td>
         <td><%= link_to 'Show', tracker %></td>
+        <td ><span style="color:red"><%= tracker.bugs %></span></td>
+       
+        <td >
+           <%if  tracker.status==nil or tracker.status=="2"%>
+           <%= button_to 'Send QC', qc_path(:id=>tracker.id), :method => :post, :remote=>true %>
+           <%elsif tracker.status == "1"%>
+           <span class="blue">In QC</span>
+           <%elsif tracker.status == "2"%>
+           <span class="red">Error</span>
+           <%elsif tracker.status == "3"%>
+           <span class="orange">Yet to Push</span>
+           <%elsif tracker.status == "4"%>
+           <span class="green">Live</span>
+           Live
+           <%end%>
+         </td>
         <!-- <td><%#= link_to 'Edit', edit_tracker_path(tracker) %></td> -->
         <td><%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
