@@ -2,7 +2,7 @@
  
   <%= tinymce_assets %>
   <%=f.text_area :qc_remarks, :class => "tinymce",:cols => 10 %>
-  <%= tinymce %><br />
+  <%= tinymce :plugins => ["wordcount"]%><br />
   <div style="clear:both"></div>
   <div class="actions">
     <%= f.submit "Save"%>
