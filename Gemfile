@@ -56,3 +56,5 @@ gem 'mechanize'
 gem 'nokogiri'
 gem 'chartkick'
 gem 'groupdate'
+
+gem 'tinymce-rails'

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post 'error'=>'trackers#error'
   post 'push'=>'trackers#to_push'
   post 'live'=>'trackers#live'
-  get 'quality_check'=>'dashboard#qcin'
+  
 
 
   resources :users
@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/dashboard/neutral' =>'dashboard#neutral'
   get '/dashboard/inbound' =>'dashboard#inbound'
   post '/assign' => 'dashboard#assign'
+  get 'quality_check'=>'dashboard#qcin'
+  get 'qc_remarks'=>'dashboard#qc_remarks'
 
   get 'news'=>'news#new'
   post '/news/generated'=>'news#news_gen'

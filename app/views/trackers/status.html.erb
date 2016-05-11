@@ -59,13 +59,16 @@
     <tr>
       <th>Date</th>
       <th>Ticket ID</th>
-      <th>Ticket Owner</th>
-      <th>Created</th>
+      <th>Description</th>
+      <th>Created By</th>
+      <th>Created Date</th>
       <th>ETA</th>
       <th>Finished</th>
-      <th>Type of Work</th>
+      <th>Request Type</th>
       <th>No. of Commits</th>
-      <th>Description</th>
+      <th>No. of Bugs</th>
+      <th>Status</th>
+      
     </tr>
   </thead>
 
@@ -74,13 +77,28 @@
       <tr>
         <td><%=tracker.created_at.strftime("%d-%m-%y")%></td>
         <td ><%=tracker.ticket_id%></td>
+        <td ><%=  tracker.disc%></td>
         <td ><%= tracker.owner%></td>
         <td ><%= tracker.created %></td>
         <td ><%=  tracker.eta%></td>
         <td ><%=  tracker.finished%></td>
         <td ><%=   tracker.tow%></td>
         <td ><%=  tracker.noc%></td>
-        <td ><%=  tracker.disc%></td>
+        <td ><span class="red"><%if tracker.bugs != nil%><%=link_to tracker.bugs, qc_remarks_path(:id=>tracker.id)%><%end%></span></td>
+        <td >
+           <%if  tracker.status=="3" %>
+           <%= button_to 'Live', live_path(:id=>tracker.id), :method => :post, :remote=>true %>
+           <%elsif tracker.status == "1"%>
+           <span class="blue">In QC</span>
+           <%elsif tracker.status == "2"%>
+           <span class="red">Error</span>
+           <%elsif tracker.status == "3"%>
+           <span class="orange">Yet to Push</span>
+           <%elsif tracker.status == "4"%>
+           <span class="green">Live</span>
+           <%end%>
+         </td>
+        
       </tr>
     <% end %>
   </tbody>

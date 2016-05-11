@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
 		require_dev_or_admin
 		@users=User.all
 		@trackers=Tracker.all.order(created_at: :desc)
+		 @pen= Tracker.where("finished=?", "")
 		@stats=@trackers.pluck("comp")
 		 @p_count=Tracker.where("uid=? and finished=?", user,"").count
 		respond_to do |format|
@@ -12,6 +13,12 @@ class DashboardController < ApplicationController
       format.csv { send_data @trackers.to_csv}
       format.xls# { send_data @trackers.to_csv(col_sep: "\t")}
     end
+	end
+
+	def qc_remarks
+	  @qc_remark=Tracker.where("id=?",params[:id]).pluck("qc_remarks").first
+	  puts "abc===#{@qc_remark}"
+
 	end
 
 	def inbound

@@ -204,10 +204,11 @@ end
   # PATCH/PUT /trackers/1
   # PATCH/PUT /trackers/1.json
   def update
+    puts params[:qc_remarks]
     respond_to do |format|
       if @tracker.update(tracker_params)
-        format.html { redirect_to @tracker, notice: 'Ticket was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tracker }
+        format.html { redirect_to '/quality_check', notice: 'Ticket was successfully updated.' }
+        format.json { render :index, status: :ok, location: @tracker }
       else
         format.html { render :edit }
         format.json { render json: @tracker.errors, status: :unprocessable_entity }
@@ -260,7 +261,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tracker_params
-      params.require(:tracker).permit(:ticket_id, :comp, :staging, :created, :eta, :finished, :tow, :owner, :noc, :disc, :uid, :bugs, :status)
+      params.require(:tracker).permit(:ticket_id, :comp, :staging, :created, :eta, :finished, :tow, :owner, :noc, :disc, :uid, :bugs, :status, :prod_remarks, :qc_remarks)
     end
 
 end

@@ -67,4 +67,8 @@ end
 def search
 	@res=Tracker.where("ticket_id LIKE ?", "%#{params[:ticket_id]}%")
 end
+
+
+
+
 end

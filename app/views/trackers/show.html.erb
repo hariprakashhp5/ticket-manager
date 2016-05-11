@@ -1,9 +1,18 @@
+<p>
+<strong>ETA:</strong><br>
+<textarea style="height:100px; width:500px;">
+Hi <%= @tracker.owner %>,
+
+ETA will be today <%a=Time.now%><%=a.strftime("%d-%m-%y")%> EOD.</textarea>
+</p>
 
 <p>
   <strong>Pull Request:</strong><br>
   <textarea style="height:100px; width:900px;">Hi Raji,
 
-Please pull the staging candidate group "<%= @tracker.staging %>" for changes done in gamma.</textarea>
+Please pull the staging candidate group "<%= @tracker.staging %>" for changes done in gamma.
+
+Exit Criteria:</textarea>
 </p>
 
 

@@ -24,15 +24,15 @@
     <tr>
       <th>Date</th>
       <th>Ticket ID</th>
-      <th>Ticket Owner</th>
-      <th>Created</th>
+       <th>Description</th>
+      <th>Created By</th>
+      <th>Created Date</th>
       <th>ETA</th>
       <th>Finished</th>
-      <th>Type of Work</th>
+      <th>Request Type</th>
       <th>No. of Commits</th>
-      <th>Staging</th>
-    <th>Completed</th>
-      <th>Description</th>
+      <th>Staging Group</th>
+    <th>ETA Met?</th>
       <th>Config Owner</th>
       <th>Bugs</th>
       <th>Status</th>
@@ -46,6 +46,7 @@
       <tr>
         <td><%= tracker.created_at%></td>
         <td ><a target="_blank" href="https://bankbazaarmail.zendesk.com/agent/tickets/<%= tracker.ticket_id%>"><%= tracker.ticket_id %></a></td>
+        <td ><%= tracker.disc%></td>
         <td ><%= tracker.owner %></td>
                   <td ><%= tracker.created %></td>
         <td ><%= tracker.eta%></td>
@@ -53,10 +54,12 @@
         <td ><%= tracker.tow%></td>
         <td ><%= tracker.noc%></td>
         <td ><%= tracker.staging%></td>
-        <td ><%= tracker.comp %></td>
-        <td ><%= tracker.disc%></td>
+        <td ><%if tracker.comp == "> ETA" %>
+          <span class="red">NO</span>
+          <%elsif tracker.comp == "< ETA" || tracker.comp == "On Time"%>
+          <span class="green">YES</span><%end%></td>
         <td><%= User.where("id=?", tracker.uid).pluck("name").first.capitalize%></td>
-        <td ><span style="color:red"><%= tracker.bugs %></span></td>
+        <td ><span class="red"><%if tracker.bugs != nil%><%=link_to tracker.bugs, qc_remarks_path(:id=>tracker.id)%><%end%></span></td>
        
         <td >
            <%if  tracker.status=="3" %>

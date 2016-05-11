@@ -50,7 +50,7 @@
         <td ><%= tracker.comp %></td>
         <td ><%= best_in_place tracker, :disc, :as => :textarea%></td>
         <!-- <td><%#= link_to 'Show', tracker %></td> -->
-        <td ><span class="red"><%= tracker.bugs %></span></td>
+        <td ><span class="red"><%if tracker.bugs != nil%><%=link_to tracker.bugs, qc_remarks_path(:id=>tracker.id)%><%end%></span></td>
        
         <td >
            <%if  tracker.status=="2" or tracker.status==nil %>
