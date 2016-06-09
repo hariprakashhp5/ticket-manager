@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'error'=>'trackers#error'
   post 'push'=>'trackers#to_push'
   post 'live'=>'trackers#live'
+  post 'finished' => 'trackers#finished'
   
 
 

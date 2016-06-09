@@ -45,6 +45,7 @@ class DashboardController < ApplicationController
 
     respond_to do |format|
       if @tracker.save
+      	BgWorker.perform_async(@tracker.id)
         format.html { redirect_to '/dashboard', notice: 'Ticket was assigned successfully.' }
         format.json { render :index, status: :created, location: @dashboard }
       else

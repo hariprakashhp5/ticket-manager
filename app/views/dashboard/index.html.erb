@@ -12,11 +12,11 @@
 <div class="pull-left"><span>Pending:</span> <a href="/pending"><%=pending%></a></div>
 
 
-<div class="status"><span>Outbound:</span> <a href="/dashboard/outbound"><%=@stats.count("> ETA")%></a></div>
+<div class="status"><a href="/dashboard/outbound"><span>Outbound:</span> <%=@stats.count("> ETA")%></a></div>
 
-<div class="status"><span>Neutral:</span> <a href="/dashboard/neutral"><%=@stats.count("On Time")%></a></div>
+<div class="status"><a href="/dashboard/neutral"><span>Neutral:</span><%=@stats.count("On Time")%></a></div>
 
-<div class="status"><span>Inbound:</span> <a href="/dashboard/inbound"><%=@stats.count("< ETA")%></a></div>
+<div class="status"><a href="/dashboard/inbound"><span>Inbound:</span><%=@stats.count("< ETA")%></a></div>
 
 <div style="clear:both"></div>
 <table>
@@ -44,7 +44,7 @@
   <tbody>
     <% @trackers.each do |tracker| %>
       <tr>
-        <td><%= tracker.created_at%></td>
+        <td><%= tracker.created_at.in_time_zone("Chennai").strftime('%d-%-m-%y, %H:%M:%S')%></td>
         <td ><a target="_blank" href="https://bankbazaarmail.zendesk.com/agent/tickets/<%= tracker.ticket_id%>"><%= tracker.ticket_id %></a></td>
         <td ><%= tracker.disc%></td>
         <td ><%= tracker.owner %></td>

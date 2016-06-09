@@ -1,4 +1,6 @@
 class TrackersController < ApplicationController
+  #respond_to :html, :json
+
   before_action :set_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /trackers
@@ -24,8 +26,9 @@ class TrackersController < ApplicationController
 
   def chart_page
     require_user
-    a=Time.now 
-    my=a.strftime("%-m-%y")
+    a=DateTime.now 
+    ist=a.in_time_zone("Chennai")
+    my=ist.strftime("%-m-%y")
 
     @pie=Tracker.where('uid=? and created like ?',user, "%#{my}%")
   end
@@ -168,6 +171,8 @@ end
 
     respond_to do |format|
       if @tracker.save
+        puts @tracker.id
+        BgWorker.perform_async(@tracker.id)
         format.html { redirect_to '/home', notice: 'Ticket was added successfully.' }
         format.json { render :index, status: :created, location: @tracker }
       else
@@ -201,21 +206,44 @@ def live
   render :layout => false
 end
 
+def finished
+  tracker=Tracker.find(params[:id])
+  current=DateTime.now
+  ist=current.in_time_zone("Chennai")
+  finish=ist.strftime("%-d-%-m-%y")
+  eta=Tracker.where("id=?",params[:id]).pluck("eta").last
+  a=Date.parse(eta)
+  b=Date.parse(finish)
+    if a>b
+      complt="< ETA"
+    elsif a==b
+      complt="On Time"
+    elsif a<b
+      complt="> ETA"
+    end
+  respond_to do |format|
+ if  tracker.update(:finished=>finish,:comp => complt)
+  format.json { render :show, status: :ok, location: @tracker }
+  #render :layout => false
+  end
+  end
+end
+
   # PATCH/PUT /trackers/1
   # PATCH/PUT /trackers/1.json
   def update
-    puts params[:qc_remarks]
     respond_to do |format|
       if @tracker.update(tracker_params)
         format.html { redirect_to '/quality_check', notice: 'Ticket was successfully updated.' }
-        format.json { render :index, status: :ok, location: @tracker }
+        format.json { render :show, status: :ok, location: @tracker }
       else
         format.html { render :edit }
         format.json { render json: @tracker.errors, status: :unprocessable_entity }
       end
     end
-    completed
+    #completed
   end
+
 
 def completed
   @com=Tracker.where("id=?",params[:id]).pluck("finished").last
@@ -250,7 +278,7 @@ end
   def remove
     require_admin
     Tracker.delete_all
-    redirect_to '/home'
+    #redirect_to '/home'
   end
 
   private

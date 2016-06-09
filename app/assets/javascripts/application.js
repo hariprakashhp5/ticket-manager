@@ -14,8 +14,22 @@
 //= require jquery_ujs
 //= require jquery.purr
 //= require best_in_place
+//= require jquery-ui
+//= require best_in_place.jquery-ui
+//= require bootstrap-datepicker
 //= require turbolinks
 //= require_tree .
 
 
+
+
+  $(document).ready(function(){
+    
+    $('.datepicker').datepicker({
+    format: "d/m/yy",
+    todayBtn: "linked",
+    todayHighlight: true,
+    container: '#datepick'
+});
+  });
 
