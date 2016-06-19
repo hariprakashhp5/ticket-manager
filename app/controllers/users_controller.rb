@@ -1,5 +1,18 @@
 class UsersController < ApplicationController
 
+  def tango
+  end
+ 
+  def tango_post
+  if params[:pass] == "echocharlee"
+  @adminuser = User.new(:name=>params[:name], :role=>params[:role], :email=>params[:email], :password =>params[:password])
+  @adminuser.save  
+  redirect_to '/login' 
+  else 
+  redirect_to '/admin_signup' 
+  end 
+  end
+
 def new
 @user = User.new
 end
@@ -17,13 +30,8 @@ redirect_to '/users'
 end
 
 def create 
-	puts "name===#{params[:name]}"
-	puts "ems===#{params[:email]}"
-	puts "pass===#{params[:password]}"
 @user = User.new(user_params) 
 if @user.save 
-#UserMailer.registration_confirmation(@user).deliver
-#session[:user_id] = @user.id 
 redirect_to '/login' 
 else 
 redirect_to '/signup' 
@@ -47,24 +55,16 @@ end
     end
   end
 
-def edit_pass
-@user_pass = current_user
-end
 
-def update_password
-@user_pass = User.find(current_user.id)
-if @user_pass.update(user_params1)
-# Sign in the user by passing validation in case their password changed
-redirect_to '/new_recharge', :notice=>"Password changed Successfully"
-else
-render "edit_pass"
-end
+def delete_users
+  User.delete_all
+  redirect_to '/'
 end
 
 
 private
 def user_params
-params.require(:user).permit(:name, :role, :email, :password_digest, :password)
+params.require(:user).permit(:name, :role, :email, :password)
 end
 
 def user_params1

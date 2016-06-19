@@ -1,0 +1,108 @@
+
+
+<%if @control == "1"%>
+<a class="btn btn-xs btn-default-tracker" role="botton" href="#">Total: <%=@trackers.count%></a>
+<a class="btn btn-xs btn-danger-tracker" role="botton" href="/pending">Pending: <%=pending%></a>
+<a class="pull-right btn btn-xs btn-default-tracker" role="botton" href="#">Outbound: <%=@delay%></a>
+<a class="pull-right btn btn-xs btn-default-tracker" role="botton" href="#">Neutral: <%=@ontime%></a>
+<a class="pull-right btn btn-xs btn-default-tracker" role="botton" href="#">Inbound: <%=@early%></a>
+<%elsif @control == "0"%>
+<a class="pull-right btn btn-xs btn-danger-tracker" role="botton" href="/pending">Pending: <%=pending%></a>
+<%end%>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <%if @control == "1"%>
+      <th>Ticket ID</th>
+      <%elsif @control == "0"%>
+      <th colspan="2">Ticket ID</th>
+      <%end%>
+      <th>Created By</th>
+      <th>Created Date</th>
+      <th>ETA</th>
+      <%if @control == "1"%>
+      <th>Finished</th>
+      <%end%>
+      <th>Request Type</th>
+      <th>No. of Commits</th>
+      <th>Staging</th>
+      <%if @control == "0"%>
+      <th>Completed</th>
+      <%end%>
+      <th>Description</th>
+      <%if @control == "1"%>
+      <th>Blurb</th>
+      <%end%>
+      <th>Bugs</th>
+      <th>Status</th>
+      <%if @control == "0"%>
+      <th>Finished</th>
+      <%end%>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trackers.each do |tracker| %>
+      <tr>
+        <td><%= tracker.created_at.strftime("%d-%m-%y")%></td>
+        <%if @control == "1"%>
+          <td ><a title="View this ticket on Zendesk" target="_blank" href="https://bankbazaarmail.zendesk.com/agent/tickets/<%= tracker.ticket_id%>"><%= tracker.ticket_id %></a></td>
+        <%elsif @control == "0"%>
+          <td><a href="/trackers/<%=tracker.id%>"><%=tracker.ticket_id%></a>
+          <td width="20px;">   <a title="Open this ticket in Zendesk" target="_blank" href="https://bankbazaarmail.zendesk.com/agent/tickets/<%= tracker.ticket_id%>">View</a></td></td>
+        <%end%>
+        <td ><%= tracker.owner %></td>
+         <td ><%if tracker.created!=""%><%= DateTime.parse(tracker.created).strftime("%b %d, %Y %H:%M")%><%end%></td>
+        <td ><%= best_in_place tracker, :eta, :inner_class => "tdfield"%></td>
+        <%if @control == "1"%>
+          <td><%if tracker.status=="4" and tracker.finished==""%>
+            <%= button_to 'Finished', finished_path(:id=>tracker.id), :method => :post, :remote=>true,class: "btn btn-xs btn-success-tracker" %>
+            <%elsif tracker.finished !=""%>
+            <%=DateTime.parse(tracker.finished).strftime("%b %d, %Y %H:%M")%>
+            <%end%>
+          </td>
+        <%end%>
+          <td ><%=  best_in_place tracker, :tow, :inner_class => "tdfield" , :as => :select, :collection => {"LPU"=>"LPU","NLP"=>"NLP","NEWSUP" => "NEWSUP", "NEWSAD" => "NEWSAD","LEFTNAV"=>"LEFTNAV","INTERLINKS"=>"INTERLINKS","INFOGRAPHIC"=>"INFOGRAPHIC", "METATAGS"=>"METATAGS","FOOTERS"=>"FOOTERS","SITEMAPS"=>"SITEMAPS","TOPNAV"=>"TOPNAV","CAREERS"=>"CAREERS"}%></td>
+        
+        
+        <td ><%= best_in_place tracker, :noc, :inner_class => "tdfield"%></td>
+        <td ><%= best_in_place tracker, :staging, :inner_class => "tdfield"%></td>
+        <%if @control == "0"%>
+          <td ><%= tracker.comp %></td>
+        <%end%>
+        <td ><%= tracker.disc%></td>
+        <%if @control == "1"%>
+          <td><%= link_to 'Show', tracker %></td>
+        <%end%>
+        
+        <td ><span class="red"><%if tracker.bugs != nil%><%=link_to tracker.bugs, qc_remarks_path(:id=>tracker.id)%><%end%></span></td>
+       
+        <td >
+           <%if  tracker.status==nil or tracker.status=="2"%>
+           <%= button_to 'Send QC', qc_path(:id=>tracker.id), :method => :post, :remote=>true,class: "btn btn-xs btn-primary" %>
+           <%elsif tracker.status == "1"%>
+           <span class="blue">In QC</span>
+           <%elsif tracker.status == "2"%>
+           <span class="red">Error</span>
+           <%elsif tracker.status == "3"%>
+           <span class="orange">Yet to Push</span>
+           <%elsif tracker.status == "4"%>
+           <span class="green">Pushed</span>
+           <%elsif tracker.status == "5"%>
+           <span class="green">Live !</span>
+           <%end%>
+         </td>
+        <%if @control == "0"%>
+          <td><%if tracker.status=="4" and tracker.finished==""%>
+            <%= button_to 'Finished', finished_path(:id=>tracker.id), :method => :post, :remote=>true,class: "btn btn-xs btn-success-tracker" %>
+            <%elsif tracker.finished !=""%>
+            <%=DateTime.parse(tracker.finished).strftime("%b %d, %Y %H:%M")%>
+            <%end%>
+          </td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -46,15 +46,27 @@ group :development do
   gem 'spring'
 end
 
+gem 'figaro'
+gem 'puma'
+group :development do
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+end
+
+#gem 'rvm1-capistrano3', :require => false
+
 gem 'best_in_place', github: 'bernat/best_in_place'
 
-gem 'puma'
-
+gem 'headless'
 gem 'selenium-webdriver', '~> 2.48'
 gem 'sidekiq'
-gem 'bootstrap-datepicker-rails'
+#gem 'bootstrap-datepicker-rails'
 
 gem 'mechanize'
+gem 'time_difference', '~> 0.4.2'
 
 gem 'nokogiri'
 gem 'chartkick'

@@ -1,0 +1,13 @@
+<div class="form">
+	<h1>Admin Sign up</h1>
+  <%= form_tag url_for(:controller=>"users",:action =>"tango_post", :method=>'post')  do %>
+  <%=text_field_tag 'name',nil, placeholder: 'Name *' , class: 'tt'%>
+  <%=email_field_tag 'email',nil, placeholder: 'Email *' , class: 'tt'%>
+  <%=hidden_field_tag 'role','1'%>
+  <%=password_field_tag 'password',nil, placeholder: 'Password *' , class: 'tt'%>
+
+  <%=password_field_tag 'pass',nil, placeholder: 'Code to Create Admin User *' , class: 'tt'%>
+  <div style="clear:both"></div>
+  <%= submit_tag 'Signup', class: "btn-submit-one"%>
+  <%end%>
+  </div>

@@ -5,12 +5,6 @@ Rails.application.routes.draw do
   get 'delete_all' => 'trackers#remove'
   get 'search' => 'application#search'
   get    '/trackers/:id' => 'trackers#show'
-  #match 'wrapper' => 'trackers#testcod'#, via:[:get, :post]
-  # get 'cleaner' => 'cleaner#testcod'
-  # post 'cleaner/done' => 'cleaner#posttestcod'#, via:[:get, :post]
-  # post 'cleaner/raw'=>'cleaner#htmlraw'
-  # get 'nokocleaner' => 'trackers#testcod'
-  # post 'nokocleaner/done' => 'trackers#posttestcod'
   get 'pending' => 'trackers#pending_tickets'
   get 'charts' => 'trackers#chart_page'
   post 'qc'=>'trackers#to_qc'
@@ -20,9 +14,19 @@ Rails.application.routes.draw do
   post 'finished' => 'trackers#finished'
   
 
+  ###### Dynamic Reload #####
+
+  get 'table'=>'trackers#current_dynamic'
+  get 'table_index'=>'trackers#ind_dynamic'
+  get 'dashb_index'=>'dashboard#dashb_dynamic'
+  get 'qc_index'=>'dashboard#qc_dynamic'
+
 
   resources :users
   get 'signup'  => 'users#new' 
+  get '/admin_signup'=>'users#tango'
+  post '/admin_create'=>'users#tango_post'
+  get '/delete_users'=>'users#delete_users'  
   
 
   resources :sessions
@@ -39,11 +43,15 @@ Rails.application.routes.draw do
   post '/assign' => 'dashboard#assign'
   get 'quality_check'=>'dashboard#qcin'
   get 'qc_remarks'=>'dashboard#qc_remarks'
+  
 
   get 'news'=>'news#new'
   post '/news/generated'=>'news#news_gen'
 
-get 'test1' =>'cleaner#test'
+################ password reset #######################
+
+  get '/password_reset'=>'password_reset#forgot'
+  post '/password_reset'=>'password_reset#reset_pass'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

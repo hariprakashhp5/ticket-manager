@@ -1,4 +1,4 @@
-<div class="half"><table>
+<div class="half"><table class="table table-bordered">
 <thead>
 	<tr>
 	<th colspan="3"><strong>Total Tickets:<%=@trackers.count%></strong></th></tr>
@@ -34,38 +34,30 @@
   <%= link_to "Excel", status_path(format: "xls") %>
 </h5>
 
-  <div class="pull-left">
-  	<span>Total:</span> <%=@dat.count%>
-  </div>
+<a class="btn btn-xs btn-default-tracker" role="botton" href="#">Total: <%=@dat.count%></a>
+  
 
+<a class="pull-right btn btn-xs btn-default-tracker" role="botton" href="#">Outbound: <%=@this_month_delay%></a>
+
+<a class="pull-right btn btn-xs btn-default-tracker" role="botton" href="#">Neutral: <%=@this_month_neutral%></a>
+
+<a class="pull-right btn btn-xs btn-default-tracker" role="botton" href="#">Inbound: <%=@this_month_early%></a>
  
-<div class="status">
-  <span>Outbound:</span> <%=@this_month_delay%>
-</div>
 
-<div class="status">
-  <span>Neutral:</span> <%=@this_month_neutral%>
-</div>
 
-<div class="status">
-  <span>Inbound:</span> <%=@this_month_early%>
-</div>
-
-<div style="clear:both"></div>
-
-<table>
+<table class="table table-bordered">
   <thead>
   	
     <tr>
       <th>Date</th>
       <th>Ticket ID</th>
-      <th>Description</th>
       <th>Created By</th>
       <th>Created Date</th>
       <th>ETA</th>
       <th>Finished</th>
       <th>Request Type</th>
       <th>No. of Commits</th>
+      <th>Description</th>
       <th>No. of Bugs</th>
       <th>Status</th>
       
@@ -77,25 +69,25 @@
       <tr>
         <td><%=tracker.created_at.strftime("%d-%m-%y")%></td>
         <td ><%=tracker.ticket_id%></td>
-        <td ><%=  tracker.disc%></td>
         <td ><%= tracker.owner%></td>
-        <td ><%= tracker.created %></td>
+        <td ><%if tracker.created!=""%><%= DateTime.parse(tracker.created).strftime("%b %d, %Y %H:%M")%><%end%></td>
         <td ><%=  tracker.eta%></td>
-        <td ><%=  tracker.finished%></td>
+        <td ><%=  DateTime.parse(tracker.finished).strftime("%b %d, %Y %H:%M")%></td>
         <td ><%=   tracker.tow%></td>
         <td ><%=  tracker.noc%></td>
+        <td ><%=  tracker.disc%></td>
         <td ><span class="red"><%if tracker.bugs != nil%><%=link_to tracker.bugs, qc_remarks_path(:id=>tracker.id)%><%end%></span></td>
         <td >
-           <%if  tracker.status=="3" %>
-           <%= button_to 'Live', live_path(:id=>tracker.id), :method => :post, :remote=>true %>
-           <%elsif tracker.status == "1"%>
+           <%if tracker.status == "1"%>
            <span class="blue">In QC</span>
            <%elsif tracker.status == "2"%>
            <span class="red">Error</span>
            <%elsif tracker.status == "3"%>
            <span class="orange">Yet to Push</span>
            <%elsif tracker.status == "4"%>
-           <span class="green">Live</span>
+           <span class="green">Pushed</span>
+           <%elsif tracker.status == "5"%>
+           <span class="green">Live !</span>
            <%end%>
          </td>
         

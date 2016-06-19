@@ -11,25 +11,20 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap.min
 //= require jquery_ujs
 //= require jquery.purr
 //= require best_in_place
-//= require jquery-ui
-//= require best_in_place.jquery-ui
-//= require bootstrap-datepicker
 //= require turbolinks
 //= require_tree .
 
 
 
-
-  $(document).ready(function(){
-    
-    $('.datepicker').datepicker({
-    format: "d/m/yy",
-    todayBtn: "linked",
-    todayHighlight: true,
-    container: '#datepick'
-});
-  });
-
+$(document).ready(function() {
+	setInterval(function(){
+		$('.refresh-dynamic').load('/table');
+		$('.index-dynamic').load('/table_index');
+		$('.dashb-dynamic').load('/dashb_index');
+		$('.qc-dynamic').load('/qc_index');
+	},10000);
+ 	});

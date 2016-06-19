@@ -1,11 +1,12 @@
 class BgWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options retry: true
 
 
   def perform(tracker_id)
 
-  	
+  	headless=Headless.new
+    headless.start  
     ticket = Tracker.find(tracker_id)
   	    driver = Selenium::WebDriver.for :firefox
   	    puts "browser open"
@@ -26,12 +27,14 @@ class BgWorker
         puts subject
         #work_type=subject.scan(/\$ : (.+) -/).first.first.gsub(/[^0-9A-Za-z]/, '')
   	    date=driver.find_element(:css, '.live.full').attribute("title").split(" ").join(" ")
-  	    cd=Date.parse(date)
+        puts date
+        cd=DateTime.parse(date)
         ticket_owner=driver.find_element(:css, '.ember-view.sender').attribute("textContent").split(" ").first
         puts ticket_owner        
   	    driver.close
+        headless.destroy
 
-        ticket.update(:created => cd.strftime("%-d-%-m-%y"), :owner=>ticket_owner, :disc=>subject)
+        ticket.update(:created => cd.strftime("%d-%m-%y %H:%M"), :owner=>ticket_owner, :disc=>subject)
     
   end
 end

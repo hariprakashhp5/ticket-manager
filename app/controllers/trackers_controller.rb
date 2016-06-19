@@ -12,6 +12,7 @@ class TrackersController < ApplicationController
     @delay=stats.count("> ETA")
     @early=stats.count("< ETA")
     @trackers = Tracker.where('uid=?',user).order(created_at: :desc)
+    @control="1"
     respond_to do |format|
       format.html
       format.csv { send_data @trackers.to_csv}
@@ -19,6 +20,18 @@ class TrackersController < ApplicationController
     end
     
   end
+
+  def ind_dynamic
+    require_user
+    stats=Tracker.where('uid=?',user).pluck("comp")
+    @ontime=stats.count("On Time")
+    @delay=stats.count("> ETA")
+    @early=stats.count("< ETA")
+    @trackers = Tracker.where('uid=?',user).order(created_at: :desc)
+    @control="1"
+    render :partial => "/trackers/table.html.erb"
+  end
+
 
   # def completed_tasks
   # render json: Task.group_by_day(:created_at).count.chart_json
@@ -30,92 +43,31 @@ class TrackersController < ApplicationController
     ist=a.in_time_zone("Chennai")
     my=ist.strftime("%-m-%y")
 
-    @pie=Tracker.where('uid=? and created like ?',user, "%#{my}%")
+     @pie=Tracker.where('uid=? and created like ?',user, "%#{my}%")
+    
+  end
+
+  def current_dynamic
+    require_user
+    @control="0"
+    @tracker = Tracker.new
+    @trackers = Tracker.where('uid=? and created_at > ? AND created_at < ?', user, Date.yesterday.beginning_of_day, Date.today.end_of_day).order(created_at: :desc)
+    render :partial => "/trackers/table.html.erb"
   end
 
   def current
+  
     require_user
+    @control="0"
     @tracker = Tracker.new
     @trackers = Tracker.where('uid=? and created_at > ? AND created_at < ?', user, Date.yesterday.beginning_of_day, Date.today.end_of_day).order(created_at: :desc)
-    stats=@trackers.pluck("comp")
-    @ontime=stats.count("On Time")
-    @delay=stats.count("> ETA")
-    @early=stats.count("< ETA")
-   # Tracker.where("created_at between ? and ?", Date.yesterday.beginning_of_day, Date.today.end_of_day)
+   #  stats=@trackers.pluck("comp")
+   #  @ontime=stats.count("On Time")
+   #  @delay=stats.count("> ETA")
+   #  @early=stats.count("< ETA")
+   # # Tracker.where("created_at between ? and ?", Date.yesterday.beginning_of_day, Date.today.end_of_day)
+
   end
-
-def testcod
-end
-
-def posttestcod
-
-if params[:accept] == "1"
-      path=["//ul/li/p"]
-else
-      path=["//table/tbody/tr/td/p", "//ul/li/p"]
-end
-
-    nogo={'<p> </p>' => '', 
-      '<table>' => "\n<table width='100%' border='0' cellspacing='0' cellpadding='0' class='table table-curved'>", 
-     '&lt;' => '<', '&gt;'=>'>','<br>' => '','<p></p>' => '', ' rel="nofollow"' => '', "http://www.bankbazaar.com"=>"",
-        "https://www.bankbazaar.com"=>"",'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">'=>"",
-          "<html><body>"=>"","</body></html>"=>""}  
-
-      
-      c=params[:content]
-       bundle_out=Sanitize.fragment(c,Sanitize::Config.merge(Sanitize::Config::BASIC,
-       :elements=> Sanitize::Config::BASIC[:elements]+['table', 'tbody', 'tr', 'td', 'h1', 'h2', 'h3'],
-       :attributes=>{'a' => ['href']}) )
-
-      re = Regexp.new(nogo.keys.map { |x| Regexp.escape(x) }.join('|'))
-
-      puts "re====#{re}"
-      intr=bundle_out.gsub(re, nogo)
-
-      doc=Nokogiri::HTML.parse(intr)
-      
-      path.each do |p|
-        puts p
-        doc.xpath(p).each do |pp|
-          pp.replace(pp.text)
-        end
-      end
-      filter=doc.to_html
-      @bundle_out=filter.gsub(re,nogo)
-
-
-      open_tags= @bundle_out.scan(/</).count
-      close_tags= @bundle_out.scan(/<\//).count
-
-      if open_tags/2 == close_tags
-        @tags=["Open and close tags are equal"]
-      else
-        @p=@bundle_out.scan(/<p/).count
-        @cp=@bundle_out.scan(/<\/p/).count
-        @li=@bundle_out.scan(/<li/).count
-        @cli=@bundle_out.scan(/<\/li/).count
-        @ul=@bundle_out.scan(/<ul/).count
-        @cul=@bundle_out.scan(/<\/ul/).count
-        @ol=@bundle_out.scan(/<ol/).count
-        @col=@bundle_out.scan(/<\/ol/).count
-        @tab=@bundle_out.scan(/<table/).count
-        @ctab=@bundle_out.scan(/<\/table/).count
-        @tr=@bundle_out.scan(/<tr/).count
-        @ctr=@bundle_out.scan(/<\/tr/).count
-        @td=@bundle_out.scan(/<td/).count
-        @ctd=@bundle_out.scan(/<\/td/).count
-
-        arr=[[@li,@cli,'li'],[@ul,@cul,'ul'],[@ol,@col,'ol'],[@p,@cp,'p'],[@tab,@ctab,'table'],[@tr,@ctr,'tr'],[@td,@ctd,'td']]
-        bar=[] #initializing empty array to appand the results
-        for i in 0..arr.count-1
-        if arr[i][0] != arr[i][1]
-        var=arr[i][2]+"="+arr[i][0].to_s+"|"+arr[i][1].to_s
-        @error=bar<<var
-        end
-        end
-        @tags=@error
-        end
-end
 
 
 
@@ -146,7 +98,11 @@ end
   end
 
   def pending_tickets
+    if current_user.admin?
+      @trackers=Tracker.where("finished=?","")
+    else
     @trackers=Tracker.where("uid=? and finished=?",user, "")
+  end
   end
     # GET /trackers/1
   # GET /trackers/1.json
@@ -210,8 +166,10 @@ def finished
   tracker=Tracker.find(params[:id])
   current=DateTime.now
   ist=current.in_time_zone("Chennai")
-  finish=ist.strftime("%-d-%-m-%y")
-  eta=Tracker.where("id=?",params[:id]).pluck("eta").last
+  # finish=ist.strftime("%b %d, %Y %H:%M")
+  finish=ist.strftime("%d-%m-%y %H:%M")
+  #eta=Tracker.where("id=?",params[:id]).pluck("eta").last
+  eta = tracker.eta
   a=Date.parse(eta)
   b=Date.parse(finish)
     if a>b
@@ -221,9 +179,10 @@ def finished
     elsif a<b
       complt="> ETA"
     end
+  time_diff=TimeDifference.between(tracker.created,finish).in_hours
   respond_to do |format|
- if  tracker.update(:finished=>finish,:comp => complt)
-  format.json { render :show, status: :ok, location: @tracker }
+ if  tracker.update(:finished=>finish,:comp => complt,:status=>'5', :time_taken => time_diff )
+  format.json { render :index, status: :ok, location: @tracker }
   #render :layout => false
   end
   end
@@ -289,7 +248,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tracker_params
-      params.require(:tracker).permit(:ticket_id, :comp, :staging, :created, :eta, :finished, :tow, :owner, :noc, :disc, :uid, :bugs, :status, :prod_remarks, :qc_remarks)
+      params.require(:tracker).permit(:ticket_id, :comp, :staging, :created, :eta, :finished, :tow, :owner, :noc, :disc, :uid, :bugs, :status, :prod_remarks, :qc_remarks, :time_taken)
     end
 
 end

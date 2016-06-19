@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
 
 	def current_user 
   @current_user ||= User.find(session[:user_id]) if session[:user_id] 
+  #@current_user ||= User.find(3)
 end
+
 
 def require_user 
   redirect_to '/login' unless current_user 
@@ -30,6 +32,10 @@ def require_admin
 else
   redirect_to '/login'
 end
+end
+
+def require_qc
+redirect_to '/login' unless current_user.qc?
 end
 
 def require_qc_or_admin_or_dev
@@ -58,9 +64,9 @@ def user
 
 end
 
- def pending
+ def pending #Count of pending ticket is fetched from here
     @pendings=Tracker.where("uid=? and finished=?", user,"")
-    @p_count=@pendings.count
+     @p_count=@pendings.count
     return @p_count
 end
 

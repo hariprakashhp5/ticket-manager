@@ -1,0 +1,69 @@
+
+
+.alert-tracker {
+	position: fixed;
+	left:10px;
+	top:120px;
+  padding: 3px;
+  width:200px;
+  margin:5px 5px;
+  /*margin-bottom: 2px;*/
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success-tracker {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  text-align: center;
+}
+
+.alert-danger-tracker {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  text-align: center;
+}
+
+
+
+
+
+
+.btn-success-tracker {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn-danger-tracker {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  margin-bottom:5px;
+}
+
+.btn-danger-tracker:hover {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+.btn-default-tracker  {
+  color: #333;
+  background-color: #e7e7e7;
+  border-color: #ccc;
+  margin-bottom:5px;
+}
+.btn-default-tracker :hover {
+  color: #333;
+  background-color: #e1e1e1;
+  border-color: #adadad;
+}
+
+.pull-right {
+  float: right !important;
+  margin-right: 2px;
+  margin-left: 2px;
+}

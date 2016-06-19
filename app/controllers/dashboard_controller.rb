@@ -15,6 +15,17 @@ class DashboardController < ApplicationController
     end
 	end
 
+	def dashb_dynamic
+		require_dev_or_admin
+		@users=User.all
+		@trackers=Tracker.all.order(created_at: :desc)
+		 @pen= Tracker.where("finished=?", "")
+		@stats=@trackers.pluck("comp")
+		 @p_count=Tracker.where("uid=? and finished=?", user,"").count
+		 render :partial => "/dashboard/dashb.html.erb"
+	end
+
+
 	def qc_remarks
 	  @qc_remark=Tracker.where("id=?",params[:id]).pluck("qc_remarks").first
 	  puts "abc===#{@qc_remark}"
@@ -36,6 +47,12 @@ class DashboardController < ApplicationController
 	def qcin
 		require_qc_or_admin_or_dev
 		@trackers=Tracker.where("status=?", "1")
+	end
+
+	def qc_dynamic
+		require_qc_or_admin_or_dev
+		@trackers=Tracker.where("status=?", "1")
+		render :partial => "/dashboard/qc.html.erb"
 	end
 
 	def assign

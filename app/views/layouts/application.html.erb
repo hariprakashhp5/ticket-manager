@@ -13,41 +13,70 @@ function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
 }
 
-window.onload = timedRefresh(10000);
+//window.onload = timedRefresh(10000);
 
 //   -->
 </script>
 </head>
 <body>
-	<div class="top-nav">
-	
-	<%if current_user%>
-	<div class="top-left"><a href="/home">Home</a></div>
-	<div class="top-left"><a href="/trackers">All Tickets</a></div>
-	<div class="top-left"><a href="/status">Status</a></div>
-	<div class="top-left"><a href="/charts">Charts</a></div>
-	<%if current_user.admin? || current_user.dev?%>
-	<div class="top-right"><a href="/users">Users</a></div>
-	<div class="top-left"><a href="/dashboard">Dashboard</a></div>
-	<%end%>
-	<%if current_user.dev?%>
-	<div class="top-left"><a href="/quality_check">QC</a></div>
-	<%end%>
-	<div class="top-right"><%= link_to "Logout", logout_path, method: "delete" %> </div>
-	
-	<%else%>
-	<div class="top-right"><a href="/login">Login</a></div>
-	<div class="top-right"><a href="/signup">Signup</a></div>
-	<%end%>
-	
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		<a class="navbar-brand" href="#">Tracker</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<%if current_user%>
+			<li><a href="/home">Home</a></li>
+			<li><a href="/trackers">All Tickets</a></li>
+			<li><a href="/status">Status</a></li>
+			<li><a href="/charts">Charts</a></li>
+			<%if current_user.admin? || current_user.dev?%>
+			<li><a href="/dashboard">Dashboard</a></li>
+			<li><a href="/quality_check">QC</a></li>
+			<%end%>
+			<%if current_user.qc?%>
+			<li><a href="/dashboard">Dashboard</a></li>
+			<li><a href="/quality_check">QC</a></li>
+			<%end%>
+			<%end%>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<%if current_user%>
+			<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			<%if current_user.admin? || current_user.dev?%>
+			<li><a href="/users">Users</a></li>
+			<%end%>
+			<li><a href="/password_reset">Reset Password</a>
+			<li role="separator" class="divider"></li>
+			<li><%= link_to "Logout", logout_path, method: "delete" %></li>
+			</ul>
+			</li>
+
+			<%else%>
+			<ul class="nav navbar-nav">
+			<li><a href="/login">Login</a></li>
+			<li><a href="/signup">Signup</a></li>
+			</ul>
+			<%end%>
+
+		</ul>	
+
+
+	</div>
+</div>
+</nav>
 	
 <%#= form_tag url_for(:controller=>"application",:action =>"search") ,:method=>"get" do %>
 	<!-- <input style="width:120px; float:right;" name="ticket_id" ></input>
 	<%#end%> -->
 
-	<div style="clear:both"></div></div><br>
-
+	<!-- <div style="clear:both"></div></div><br> -->
+<div class="container-fluid">
 <%= yield %>
-
+</div>
 </body>
 </html>

@@ -2,12 +2,12 @@
 
 <h1 style="text-align:center;">Pending Tickets</h1>
 
-<div class="pull-left"><span>Pending:</span> <%=pending%></div>
+<a class="btn btn-xs btn-default-tracker" role="botton" href="#">Pending: <%=@trackers.count%></a>
 
 
 
 <div style="clear:both"></div>
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Date</th>
@@ -23,7 +23,7 @@
     <!--   <th>Completed</th> -->
       <th>Bugs</th>
       <th>Status</th>
-      <th>Delete</th>
+     <!--  <th>Delete</th> -->
       <!-- <th colspan="3"></th> -->
     </tr>
   </thead>
@@ -46,8 +46,8 @@
         <td ><span class="red"><%if tracker.bugs != nil%><%=link_to tracker.bugs, qc_remarks_path(:id=>tracker.id)%><%end%></span></td>
        
         <td >
-           <%if  tracker.status=="3" %>
-           <%= button_to 'Live', live_path(:id=>tracker.id), :method => :post, :remote=>true %>
+           <%if  tracker.status=="2" or tracker.status==nil %>
+           <%= button_to 'Send QC', qc_path(:id=>tracker.id), :method => :post, :remote=>true,class: "btn btn-xs btn-primary" %>
            <%elsif tracker.status == "1"%>
            <span class="blue">In QC</span>
            <%elsif tracker.status == "2"%>
@@ -55,10 +55,12 @@
            <%elsif tracker.status == "3"%>
            <span class="orange">Yet to Push</span>
            <%elsif tracker.status == "4"%>
-           <span class="green">Live</span>
+           <span class="green">Pushed</span>
+           <%elsif tracker.status == "5"%>
+           <span class="green">Live !</span>
            <%end%>
          </td>
-        <td><%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+       <!--  <td><%#= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
