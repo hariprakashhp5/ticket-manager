@@ -1,4 +1,14 @@
 <div class="form">
+	<% if @user.errors.any? %>
+    <div class="alert-d alert-danger">
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <h1>Sign up</h1>
 <%= form_for(@user) do |f| %>
       <%= f.text_field :name, :placeholder => "Name *" ,class: "tt" %>

@@ -14,4 +14,8 @@ def self.to_csv(options = {})
 	end
 end
 	
+
+	validates :ticket_id, :presence => true,:uniqueness=>true
+
+
 end

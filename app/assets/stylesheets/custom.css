@@ -1,15 +1,18 @@
 
 
-.alert-tracker {
-	position: fixed;
-	left:10px;
-	top:120px;
+.alert-d,.alert-tracker {
   padding: 3px;
-  width:200px;
+  width:250px;
   margin:5px 5px;
   /*margin-bottom: 2px;*/
   border: 1px solid transparent;
   border-radius: 4px;
+}
+
+.alert-tracker{
+  position: fixed;
+  left:10px;
+  top:120px;
 }
 
 .alert-success-tracker {

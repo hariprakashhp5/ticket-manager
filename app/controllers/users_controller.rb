@@ -29,14 +29,27 @@ def destroy
 redirect_to '/users'
 end
 
-def create 
-@user = User.new(user_params) 
-if @user.save 
-redirect_to '/login' 
-else 
-redirect_to '/signup' 
-end 
-end
+# def create 
+# @user = User.new(user_params) 
+# if @user.save 
+# redirect_to '/login' 
+# else 
+# redirect_to '/signup' 
+# end 
+# end
+
+def create
+   @user = User.new(user_params) 
+
+    respond_to do |format|
+      if @user.save 
+        format.html { redirect_to '/login', notice: 'Signup Success' }
+      else
+        format.html { render :new }
+        format.json { render json: @tracker.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
 def edit
 end

@@ -1,6 +1,8 @@
 
   <div class="form">
-  <p id="notice"><%= notice %></p>
+  <%if notice !=nil%>
+	<p class="alert-tracker alert-danger-tracker"><%= notice %></p>
+	<%end%>
   <h3>LOG IN</h3>
 <%= form_for(:session, url: login_path) do |f| %> 
   <%= f.email_field :email, :placeholder => "Email", class: "tt" %> 
